@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+
+    <script>
+        window.onload = function () {
+
+            let show = (cname) => {
+                let data = document.getElementsByClassName(cname);
+                let tableHTML = "";
+                for (let i = 0; i < data.length; i++) {
+                    tableHTML += `<tr> ${data[i].innerHTML} </tr>`;
+                }
+                document.getElementById('table').innerHTML = tableHTML;
+            }
+
+            show("page1");
+            document.getElementById('one').addEventListener('click', () => {
+                show("page1");
+            }, false);
+
+            document.getElementById('two').addEventListener('click', () => {
+                show("page2");
+            }, false);
+
+            document.getElementById('three').addEventListener('click', () => {
+                show("page3");
+            }, false);
+
+            document.getElementById('four').addEventListener('click', () => {
+                show("page4")
+            }, false);
+
+            // document.getElementById("prev").addEventListener('click', ()=>{
+
+
+            // },false);
+
+            // document.getElementById("next").addEventListener('click', ()=>{
+
+
+            //     },false);
+        }
+    </script>
+
+</head>
+
+<body style="background-color:lightblue;">
+    <div class="container">
+        <h1 style="color: blue; text-align: center;">Employee Details</h1>
+        <table class="table table-bordered table-responsive table-striped">
+            <thead>
+                <tr class="table-dark">
+                    <th>Emp-No</th>
+                    <th>Emp-Name</th>
+                    <th>DeptName</th>
+                    <th>Salary</th>
+                </tr>
+            <tbody id="table">
+
+            </tbody>
+            </thead>
+
+    </div>
+    <table hidden=true>
+        <tr class="page1">
+            <td>101</td>
+            <td>Mahesh</td>
+            <td>IT</td>
+            <td>200000</td>
+        </tr>
+        <tr class="page1">
+            <td>102</td>
+            <td>Ramesh</td>
+            <td>HR</td>
+            <td>150000</td>
+        </tr>
+        <tr class="page1">
+            <td>103</td>
+            <td>Aklesh</td>
+            <td>IT</td>
+            <td>100000</td>
+        </tr>
+        <tr class="page1">
+            <td>104</td>
+            <td>Shruti</td>
+            <td>HR</td>
+            <td>300000</td>
+
+        </tr>
+        <tr class="page1">
+            <td>105</td>
+            <td>Rajat</td>
+            <td>IT</td>
+            <td>153499</td>
+        </tr>
+        <tr class="page2">
+            <td>106</td>
+            <td>Rakesh</td>
+            <td>HR</td>
+            <td>99999</td>
+        </tr>
+        <tr class="page2">
+            <td>107</td>
+            <td>Priya</td>
+            <td>IT</td>
+            <td>100922</td>
+        </tr>
+        <tr class="page2">
+            <td>108</td>
+            <td>Aman</td>
+            <td>HR</td>
+            <td>234322</td>
+        </tr>
+        <tr class="page2">
+            <td>109</td>
+            <td>Prem</td>
+            <td>IT</td>
+            <td>322432</td>
+        </tr>
+        <tr class="page2">
+            <td>110</td>
+            <td>Ayushi</td>
+            <td>HR</td>
+            <td>232322</td>
+        </tr>
+        <tr class="page3">
+            <td>111</td>
+            <td>Shreya</td>
+            <td>HR</td>
+            <td>233223</td>
+        </tr>
+        <tr class="page3">
+            <td>112</td>
+            <td>Akash</td>
+            <td>IT</td>
+            <td>101191</td>
+        </tr>
+        <tr class="page3">
+            <td>113</td>
+            <td>Prakash</td>
+            <td>HR</td>
+            <td>322332</td>
+        </tr>
+        <tr class="page3">
+            <td>114</td>
+            <td>Aishwarya</td>
+            <td>HR</td>
+            <td>223222</td>
+        </tr>
+        <tr class="page3">
+            <td>115</td>
+            <td>Abhishek</td>
+            <td>IT</td>
+            <td>223222</td>
+        </tr>
+        <tr class="page4">
+            <td>116</td>
+            <td>Ashwini</td>
+            <td>HR</td>
+            <td>110110</td>
+        </tr>
+        <tr class="page4">
+            <td>117</td>
+            <td>Aryan</td>
+            <td>IT</td>
+            <td>111991</td>
+        </tr>
+        <tr class="page4">
+            <td>118</td>
+            <td>Sam</td>
+            <td>HR</td>
+            <td>223223</td>
+        </tr>
+        <tr class="page4">
+            <td>119</td>
+            <td>Diya</td>
+            <td>HR</td>
+            <td>222233</td>
+        </tr>
+        <tr class="page4">
+            <td>120</td>
+            <td>Sanjay</td>
+            <td>IT</td>
+            <td>433223</td>
+        </tr>
+    </table>
+
+    <ul class="pagination justify-content-end">
+        <div id="dvpaging"></div>
+        <!-- <li class="page-item">
+            <a class="page-link" href="#" id="prev">Previous</a>
+        </li> -->
+        <li class="page-item">
+            <a class="page-link" href="#" id="one">1</a>
+        </li>
+        <li class="page-item ">
+            <a class="page-link" href="#" id="two">2</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#" id="three">3</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#" id="four">4</a>
+        </li>
+        <!-- <li class="page-item">
+            <a class="page-link" href="#" id="next">Next</a>
+        </li> -->
+
+    </ul>
+</body>
+
+</html>

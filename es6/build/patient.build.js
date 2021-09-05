@@ -73,8 +73,10 @@ window.onload = function () {
   document.getElementById("gender").innerHTML = radioList(Gender, "Gender");
   document.getElementById("radiolist").innerHTML = radioList(groupBy, "group", 1);
   showTable();
+  document.getElementById("pid").value = PId;
   document.getElementById('btnsubmit').addEventListener('click', function () {
     dataStore();
+    document.getElementById("pid").value = PId;
   }, false);
 }; //filter using radio
 
@@ -102,6 +104,9 @@ var filterRadio = function filterRadio() {
 
 
 var filterDropDown = function filterDropDown(id) {
+  //fil = property selected by radio
+  // id.value for which we show data
+  //console.log(fil,id.value);
   filterData(fil, id);
 }; //Generate Radio list
 
@@ -166,7 +171,6 @@ var dataStore = function dataStore() {
 
   for (var i = 0; i < g.length; i++) {
     if (g[i].checked) temp[headers[4]] = g[i].value;
-    g[i].unchecked;
   }
 
   var Disease = document.getElementById("disease").value;

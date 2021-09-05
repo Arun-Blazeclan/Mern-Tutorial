@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <script>
+        window.onload = function(){
+            var product = [
+                {ProductId : 105, ProductName:"Laptop", CategoryName:"Electronics", Price:70000},
+                {ProductId : 121, ProductName:"television", CategoryName:"Electronics", Price:40000},
+                {ProductId : 113, ProductName:"Speaker", CategoryName:"Electronics", Price:20000},
+                {ProductId : 104, ProductName:"Printer", CategoryName:"Electronics", Price:55000},
+                {ProductId : 107, ProductName:"Camera", CategoryName:"Electronics", Price:80000},
+                {ProductId : 106, ProductName:"Copper Wire", CategoryName:"Electrical", Price:1000},
+                {ProductId : 101, ProductName:"Socket", CategoryName:"Electrical", Price:500},
+                {ProductId : 108, ProductName:"Switch", CategoryName:"Electrical", Price:300},
+                {ProductId : 119, ProductName:"Wallet", CategoryName:"Fashion", Price:1000},
+                {ProductId : 110, ProductName:"Shoes", CategoryName:"Fashion", Price:10000},
+                {ProductId : 116, ProductName:"Wrist Watch", CategoryName:"Fashion", Price:10000},
+                {ProductId : 112, ProductName:"Formal shirt", CategoryName:"Fashion", Price:1500},
+                {ProductId : 103, ProductName:"Jeans", CategoryName:"Fashion", Price:3000},
+                {ProductId : 114, ProductName:"Sun Glasses", CategoryName:"Fashion", Price:2500},
+                {ProductId : 115, ProductName:"Bread", CategoryName:"Food", Price:50},
+                {ProductId : 111, ProductName:"Cheese", CategoryName:"Food", Price:250},
+                {ProductId : 117, ProductName:"Rice", CategoryName:"Food", Price:50},
+                {ProductId : 118, ProductName:"Wheat", CategoryName:"Food", Price:30},
+                {ProductId : 109, ProductName:"Pulses", CategoryName:"Food", Price:800},
+                {ProductId : 120, ProductName:"Pasta", CategoryName:"Food", Price:50},
+                {ProductId : 102, ProductName:"Cereal", CategoryName:"Food", Price:300},
+        ];
+        var headers = [];
+            for(var p in product[0]){
+                headers.push(p);
+            }
+
+
+        var cName=[];
+            for(var i=0;i<product.length;i++){
+                if(cName.includes(product[i].CategoryName))
+                    continue;
+                else
+                    cName.push(product[i].CategoryName);
+            }
+        function getHeader(){
+            var headerRow = '';
+            for(var i=0;i<headers.length;i++){
+                headerRow+="<th>"+headers[i]+"&nbsp&nbsp</th>";
+            };
+            document.getElementById("thead").innerHTML = headerRow;
+        };
+        generateRadio(cName);
+        function generateRadio(cName){
+            var opt="";
+            for(var i=0;i<cName.length;i++){
+                opt+='<input type="radio" name="ch" value="'+ i + '" >' + cName[i] + '</input>';
+            }
+            document.getElementById('radioList').innerHTML = opt;
+           }
+
+           var radios = document.getElementsByName('ch');
+           if(radios.length > 0) {
+               for(var idx=0;idx<radios.length;idx++){
+                   radios[idx].addEventListener('click',function(){
+
+
+            var d="Below table contain only " + cName[this.value]+ " category items";
+            document.getElementById("heading").innerHTML = d;
+
+            getHeader();
+
+            var tableRow='';
+            if(cName[this.value]=="All"){
+                for(var j=0;j<product.length;j++){
+                var tr = '<tr>'
+                for(var h=0;h<headers.length;h++){
+                    tr+='<td>'+ product[j][headers[h]] + '</td>';
+                }
+                tableRow+=tr;
+            }
+            }
+            else{
+            for(var j=0;j<product.length;j++){
+                if(cName[this.value] == product[j].CategoryName){
+                var tr = '<tr>'
+                for(var h=0;h<headers.length;h++){
+                    tr+='<td>'+ product[j][headers[h]] + '</td>';
+                }
+                tableRow+=tr;
+            }
+            }}
+            
+            document.getElementById('tbody').innerHTML = tableRow;
+                   },false);
+               }  
+           }
+
+           var d="Below table contain All category items";
+            document.getElementById("heading").innerHTML = d;
+          getHeader();
+
+           var tableRow='';
+
+            for(var j=0;j<product.length;j++){
+                
+                var tr = '<tr>'
+                for(var h=0;h<headers.length;h++){
+                    tr+='<td>'+ product[j][headers[h]] + '</td>';
+                }
+                tableRow+=tr;
+            
+            }
+            
+            document.getElementById('tbody').innerHTML = tableRow;
+
+           
+        };
+    </script>
+</head>
+<body>
+    <h4>Select category to show particular category items</h4>
+    <div id="radioList"></div>
+    
+    <hr>
+    <h4 id="heading"></h4>
+    <table style="border: 1px solid black;">
+        <thead id="thead"> 
+            
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+</body>
+</html>

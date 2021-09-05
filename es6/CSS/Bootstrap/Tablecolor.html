@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <script>
+        window.onload=function(){
+            let val = document.getElementsByName("sal");
+            //console.log(val[0].parentNode);
+            
+            for(let i=0;i<val.length;i++){
+                let s = parseInt(val[i].innerHTML);
+            
+                if(s>=200000)
+                    val[i].parentNode.className="table-danger";
+
+                else if(s<200000 && s>=150000)
+                    val[i].parentNode.className ="table-success";
+
+                else if(s<150000 && s>=100000)
+                    val[i].parentNode.className = "table-secondary";
+                else
+                    val[i].parentNode.className = "table-light";
+            }
+            
+        }
+    </script>
+
+    <style>
+    
+    </style>
+ 
+</head>
+<body>
+    <table class="table table-bordered">
+        <thead>
+            <tr class="table-dark">
+                <th>EmpNo</th>
+                <th>EmpName</th>
+                <th>DeptName</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>101</td>
+                <td>Mahesh</td>
+                <td>IT</td>
+                <td name="sal">175000</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>Tejas</td>
+                <td>HR</td>
+                <td name="sal">250000</td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td>Rahul</td>
+                <td>IT</td>
+                <td name="sal">100000</td>
+            </tr>
+            <tr>
+                <td>104</td>
+                <td>Priya</td>
+                <td>HR</td>
+                <td name="sal">150000</td>
+            </tr>
+            <tr>
+                <td>105</td>
+                <td>Shyam</td>
+                <td>IT</td>
+                <td name="sal">90000</td>
+            </tr>
+            <tr>
+                <td>106</td>
+                <td>Tejas</td>
+                <td>HR</td>
+                <td name="sal">210000</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

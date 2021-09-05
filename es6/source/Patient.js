@@ -25,8 +25,10 @@ window.onload = function () {
     document.getElementById("gender").innerHTML = radioList(Gender, "Gender");
     document.getElementById("radiolist").innerHTML = radioList(groupBy, "group", 1);
     showTable();
+    document.getElementById("pid").value=PId;
     document.getElementById('btnsubmit').addEventListener('click', () => {
         dataStore();
+        document.getElementById("pid").value=PId;
 
     }, false)
 }
@@ -58,6 +60,9 @@ let filterRadio=()=> {
 
 //filter from dropdown
 let filterDropDown=(id)=>{
+    //fil = property selected by radio
+    // id.value for which we show data
+    //console.log(fil,id.value);
     filterData(fil,id);
 }
 
@@ -159,6 +164,7 @@ let filterData = (head , attVal) =>{
     document.getElementById('printtable').innerHTML =  generateHeading() + generateBody(filteredData);
     }
 }
+
 //Generate Heading of dynamic table
 let generateHeading = () => {
     let headHTML = "<tr>";

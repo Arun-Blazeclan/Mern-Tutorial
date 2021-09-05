@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Information</title>
-    <script src="./../build/patient.build.js"></script>
+    <script src="./../build/Patient.build.js"></script>
     <link rel="stylesheet" href="Patient.css">
 </head>
 
@@ -15,6 +15,13 @@
         <h1 id="heading">Enter Patient Details</h1>
         
         <table id="createTable">
+            <tr>
+                <td>Patient Id</td>
+                <td></td>
+                <td>
+                    <input type="text" id="pid" readonly>
+                </td>
+            </tr>
             <tr>
                 <td>Patient Name</td>
                 <td>
@@ -90,11 +97,10 @@
         <hr>
         <h3>Select Group By</h3>
         <div id="radiolist"></div>
-        <br>
+        <br> 
         <div id="txtdrop"></div>
         <br>
         <div id="selectdropdown"></div>
-        <br>
         <h2 id="heading">Patient Detials Table</h2>
         <table id="printtable"></table>
     </center>
