@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Information</title>
+    <script src="./../build/Patient.build.js"></script>
+    <link rel="stylesheet" href="Patient.css">
+</head>
+
+<body>
+    <center>
+        <h1 id="heading">Enter Patient Details</h1>
+        
+        <table id="createTable">
+            <tr>
+                <td>Patient Id</td>
+                <td></td>
+                <td>
+                    <input type="text" id="pid" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>Patient Name</td>
+                <td>
+                    <div id="star">*</div>
+                </td>
+                <td>
+                    <input type="text" id="pname" class="txt" placeholder="Enter Patient Name" pattern="[A-Za-z]{1,15}"
+                        required>
+                </td>
+            </tr>
+            <tr>
+                <td>Doctor Name</td>
+                <td>
+                    <div id="star">*</div>
+                </td>
+                <td>
+                    <input type="text" id="dname" class="txt" placeholder="Enter Doctor Name" pattern="[A-Za-z]{1,15}"
+                        required>
+                </td>
+            </tr>
+            <tr>
+                <td>Age</td>
+                <td>
+                    <div id="star">*</div>
+                </td>
+                <td>
+                    <input type="number" id="age" placeholder="Enter Age" min="0" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <div id="star">*</div>
+                </td>
+                <td>
+                    <div id="gender"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Disease</td>
+                <td>
+                    <div id="star">*</div>
+                </td>
+                <td>
+                    <div id="pdisease" required=""></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Ward</td>
+                <td>
+                    <div id="star">*</div>
+                </td>
+                <td>
+                    <div id="pward"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Room No.</td>
+                <td></td>
+                <td>
+                    <input type="text" id="proom" placeholder="Enter Room No." min="0">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <input type="submit" id="btnsubmit" value="Save">
+                </td>
+            </tr>
+        </table>
+        
+        <hr>
+        <h3>Select Group By</h3>
+        <div id="radiolist"></div>
+        <br> 
+        <div id="txtdrop"></div>
+        <br>
+        <div id="selectdropdown"></div>
+        <h2 id="heading">Patient Detials Table</h2>
+        <table id="printtable"></table>
+    </center>
+</body>
+
+
+</html>

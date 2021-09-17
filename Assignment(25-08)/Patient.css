@@ -1,0 +1,42 @@
+body{
+    background-color: lightgrey;
+}
+
+#heading{
+    color: blue;
+}
+
+#createTable{
+    border: 1.5px solid;
+    background-color: lightblue;
+    width: 400px;
+    height: 300px;
+}
+
+#printtable{
+    border: 1.5px solid;
+}
+
+.txt{
+    text-transform: capitalize;
+
+}
+
+#mand{
+    color:orangered;
+}
+
+#star{
+    color:red;
+}
+
+#btnsubmit{
+    background-color: #3030df;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    font-size: 15px;
+}
