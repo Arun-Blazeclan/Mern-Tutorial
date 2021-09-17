@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indexed DB</title>
+    <script src="./Assignment.js"></script>
+    <script>
+        // global variables
+        var mydb; // used to store database
+        var tbl; // for table 
+        var ProductRowId = 0;
+
+        //Creating Database
+        function createDatabase(){
+            mydb = window.indexedDB.open("ProductDb", 1); 
+            mydb.onupgradeneeded  = function(e){
+                var dbReference = e.target.result; 
+                tbl = dbReference.createObjectStore("Prod", {keyPath: "ProductRowId"});
+    
+                var columnConstraints = {unique:false};
+                tbl.createIndex("ProductRowId1","ProductRowId",{unique:true});
+                tbl.createIndex("ProductID1","ProductID",{unique:true, autoIncrement:true});
+                tbl.createIndex("Name1","Name",columnConstraints);
+                tbl.createIndex("Category1","Category",columnConstraints);
+                tbl.createIndex("Manufacturer1","Manufacturer",columnConstraints);
+                tbl.createIndex("Price1","Price",columnConstraints);
+                tbl.createIndex("Description1","Description",columnConstraints);
+                
+
+            document.getElementById('dvstatus').innerHTML = "Database is created and Objectstore is added in it";
+            };
+
+            mydb.onsuccess =function(e){
+            document.getElementById('dvstatus').innerHTML += "Database initial Operations are done";
+            }
+
+            mydb.onerror = function(e){
+            document.getElementById('dvstatus').innerHTML += "Database IS FAILED TO OPEN";
+            }
+
+        }
+
+        //load function call in window
+        function load(){
+            createDatabase();
+            document.getElementById('btnsave').addEventListener('click', saveData, false);;
+            document.getElementById('btndeletedb').addEventListener('click', deleteDatabase, false);
+            document.getElementById('btnloaddata').addEventListener('click', loaddata,false);
+            document.getElementById('btnclear').addEventListener('click', clear,false);
+            document.getElementById('btngetall').addEventListener('click', bygetall,false);
+            document.getElementById('btngetsingle').addEventListener('click',getsingle,false);
+        }
+
+        //function to clear input fields
+        function clear(){
+            var inputs = document.getElementsByClassName('c');
+            for(var i=0;i<inputs.length;i++){
+                inputs[i].value = '';
+            } 
+        }
+
+        //function to save datas
+        function saveData(){
+            mydb = window.indexedDB.open("ProductDb");
+            if(mydb){
+                mydb.onsuccess=function(e){
+                    var tx = e.target.result.transaction("Prod", "readwrite");
+                    tbl = tx.objectStore("Prod");    
+                    // read data from UI and stored it in Product store
+                    
+                    ProductRowId+=1;
+                    var ProductID ="Prd-000";
+                    ProductID+=ProductRowId;
+                    var n = document.getElementById("pname").value;
+                    n = n[0].toUpperCase()+n.slice(1);
+                    var data = {
+                        "ProductID": ProductID,
+                        "ProductRowId": ProductRowId,
+                        "Name": n,
+                        "Category": document.getElementById("selCategory").value,
+                        "Manufacturer": document.getElementById("selManufacturer").value,
+                        "Price": document.getElementById("pprice").value,
+                        "Description": document.getElementById("pdescription").value,
+                    };
+
+                    var operation = tbl.add(data); 
+                    //on successful event
+                    operation.onsuccess = function(e){
+                    document.getElementById('dvstatus').innerHTML = "Record is added successfully";
+                    }
+                    // if failed then to onerror event
+                    operation.onerror = function(e){
+                        document.getElementById('dvstatus').innerHTML = "Save Operation is failed";
+                    }
+
+                }
+            }else {
+                document.getElementById('dvstatus').innerHTML = "Unable to Open database";
+            }
+        }
+
+        //load data from db
+        function loaddata(){
+            var records = [];
+            var mydb = window.indexedDB.open("ProductDb");
+            if(mydb){
+                mydb.onsuccess=function(e){
+                    // retrive the transaction
+                    var tx = e.target.result.transaction("Prod", "readwrite");
+                    // point to the ObjectSTore and start the transaction
+                    tbl = tx.objectStore("Prod");  
+                    
+                    
+                    // start reading all data
+                    // ALternative Method is getAll() to read all data
+                    tbl.openCursor().onsuccess = function(e){
+                        // point to the first record in the resulant
+                        var reader = e.target.result;
+                        // if the first record exist in the cursor
+                        // then start iterating on it
+                        if(reader){
+                             records.push(reader.value);
+                             reader.continue(); // move to next record   
+                        } else {
+                            document.getElementById('dvstatus').innerHTML = "Data Fetched";
+                            document.getElementById('dvstatus').innerHTML += JSON.stringify(records);
+                        }
+                    };
+                }
+            }else {
+                document.getElementById('dvstatus').innerHTML = "Unable to Open database";
+            }
+        }
+
+        function bygetall(){
+            var records = [];
+            var mydb = window.indexedDB.open("ProductDb");
+            if(mydb){
+                mydb.onsuccess=function(e){
+                    // retrive the transaction
+                    var tx = e.target.result.transaction("Prod", "readwrite");
+                    // point to the ObjectSTore and start the transaction
+                    tbl = tx.objectStore("Prod");  
+                                        
+                    // start reading all data
+                    // ALternative Method is getAll() to read all data
+                    tbl.getAll().onsuccess = function(r){
+                        var l = r.target.result;
+                        console.log(l[1]);
+                        for(var i=0 ; i<l.length ; i++){
+                            
+                            document.getElementById("dvstatus").innerHTML+= l[i].ProductID;
+                        }
+                    //document.getElementById('dvstatus').innerHTML = "Data Fetched";
+                    //console.log(r.target.result[1],r.target.result.length);
+                    //document.getElementById('dvstatus').innerHTML += JSON.stringify(r.target.result);
+                    }
+                }
+            }
+            else {
+                document.getElementById('dvstatus').innerHTML = "Unable to Open database";
+            }
+        }
+        function getsingle(){
+            records = [];
+            var mydb = window.indexedDB.open("ProductDb");
+            if(mydb){
+                mydb.onsuccess=function(e){
+                    // retrive the transaction
+                    var tx = e.target.result.transaction("Prod", "readwrite");
+                    // point to the ObjectSTore and start the transaction
+                    tbl = tx.objectStore("Prod"); 
+                                       
+                    //Start reading all data
+                    //Alternative Method is getAll() to read all data
+                    tbl.get(001).onsuccess = function(r){
+                    document.getElementById('dvstatus').innerHTML = "Data Fetched ";
+                    document.getElementById('dvstatus').innerHTML = r.result;
+                    }
+                }
+            }
+            else {
+                document.getElementById('dvstatus').innerHTML = "Unable to Open database";
+            }
+        }
+
+        function deleteDatabase(){
+            // 1. Initiate request to delete database3
+            var dbDeleteRequest = window.indexedDB.deleteDatabase("ProductDb");
+            // subscribe to the onSucces to check if the database deletion has tablen place
+            dbDeleteRequest.onsuccess = function(){
+                document.getElementById('dvstatus').innerHTML = "Database is deleted succesfully";
+            }
+        }
+    
+
+        window.onload = load;
+
+    </script>
+</head>
+<body>
+    <h3>Product Details</h3>
+    <table style="border: 1.5px solid;">
+        <tr>
+            <td>Product Name :-</td>
+            <td>
+                <input type="text" id="pname" class="c">
+            </td>
+        </tr>
+        <tr>
+            <td>Category :-</td>
+            <td>
+                <select class="c" id="selCategory">
+                    <option value="">---</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Electricals">Electricals</option>
+                    <option value="Food">Food</option>
+                    <option value="Fashion">Fashion</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Manufacturer :-</td>
+            <td>
+                <select class="c" id="selManufacturer">
+                    <option value="">---</option>
+                    <option value="TATA">TATA</option>
+                    <option value="Bajaj">Bajaj</option>
+                    <option value="HP">HP</option>
+                    <option value="IBM">IBM</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Price :-</td>
+            <td>
+                <input type="number" id="pprice" class="c">
+            </td>
+        </tr>
+        <tr>
+            <td>Description :-</td>
+            <td>
+                <input type="text" id="pdescription" class="c">
+            </td>
+        </tr>
+    </table>
+    <br>
+    <div>
+        <input type="button" value="Save" id="btnsave">
+        <input type="button" value="Load Data" id="btnloaddata">
+        <input type="button" value="Load Data by Get All" id="btngetall">
+        <input type="button" value="Clear" id="btnclear">
+        <input type="button" value="Delete Database" id="btndeletedb">
+        <input type="button" value="Get Stngle Record" id="btngetsingle">
+    </div>
+    <hr>
+    <div id="dvstatus"></div>
+    <table style="border: 1.5px solid;" id="showtable"></table>
+</body>
+</html>
