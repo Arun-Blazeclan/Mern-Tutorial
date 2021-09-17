@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persons Details</title>
+    <script src="./Person.js"></script>
+    <script>
+        window.onload = function()
+        {
+            var PersonDetail = [
+                {PersonId:1,PersonName:'Arun',City:'Indore',Age:23,Gender:'Male'},
+                {PersonId:2,PersonName:'Pinky',City:'Pune',Age:25,Gender:'Female'},
+                {PersonId:3,PersonName:'Rahul',City:'Banglore',Age:20,Gender:'Male'},
+                {PersonId:4,PersonName:'Aryan',City:'Indore',Age:23,Gender:'Male'},
+                {PersonId:5,PersonName:'Ranu',City:'Pune',Age:25,Gender:'Female'},
+                {PersonId:6,PersonName:'Kavya',City:'Banglore',Age:20,Gender:'Female'},
+            ]
+
+            //header for table
+            var header = [];
+            for(var temp in PersonDetail[0])
+            {
+                header.push(temp);
+            }
+
+            //function which shows table
+            function showTable(){
+                var showtable = document.getElementById('showtable');
+                showtable.innerHTML = headingHTML(header) + bodyHTML(PersonDetail,header);
+            }
+           
+            //On click submit data will go in table
+            var btnSubmit = document.getElementById("btnSubmit");
+            btnSubmit.addEventListener('click', function(){
+            var pId = document.getElementById("pid").value;
+            var pName = document.getElementById("pname").value;
+            var pCity = document.getElementById("pcity").value;
+            var pAge = document.getElementById("page").value;
+            var pGender = document.getElementById("pgender").value;
+
+            var flag=0;
+            var inputs = document.getElementsByClassName("per");
+            for(var i=0 ; i<inputs.length; i++){
+                if(inputs[i].value == ''){
+                 alert("All fields should be filled");
+                 flag=1;
+                 break;
+                }
+            }
+            
+            if(flag==0){
+                var pObj = new pDetail(PersonDetail);
+            pObj.addUser(PersonId=pId,PersonName=pName,City=pCity,Age=pAge,Gender=pGender);
+            showTable();
+            }
+            
+            } ,false);
+
+            //On click reset all inputs will blank
+            var btnReset = document.getElementById("btnReset");
+            btnReset.addEventListener('click', function(){
+            var inputs = document.getElementsByClassName("per");
+            for(var i=0 ; i<inputs.length; i++)
+                inputs[i].value = '';
+
+            } ,false);
+
+            //Delete button code
+            var btnDelete = document.getElementById("btnDelete");
+            btnDelete.addEventListener('click', function(){
+            var dd = parseInt(document.getElementById("pdelete").value);
+            var flag=0;
+            for(var i=0 ; i<PersonDetail.length;i++)
+            {
+                if(PersonDetail[i].PersonId == dd){
+                    PersonDetail.splice(i,1);
+                    flag=1;
+                    showTable();
+                    break;
+                }
+            }
+            if(flag==0)
+                alert("Enter valid Id");
+
+            } ,false);
+
+            //Edit button code
+            var btnEdit = document.getElementById("btnEdit");
+            btnEdit.addEventListener('click', function(){
+            var ed = parseInt(document.getElementById("pedit").value);
+            var temp=0;
+            var flag=0;
+            for(var i=0 ; i<PersonDetail.length;i++)
+            {
+                if(PersonDetail[i].PersonId == ed){
+                   document.getElementById("pid").value=PersonDetail[i].PersonId; 
+                   document.getElementById("pname").value=PersonDetail[i].PersonName;
+                   document.getElementById("pcity").value=PersonDetail[i].City;
+                   document.getElementById("page").value=PersonDetail[i].Age;
+                   document.getElementById("pgender").value=PersonDetail[i].Gender;
+                    temp=i;
+                    flag=1;
+                }
+            }
+            if(flag==0)
+                alert("Enter valid Id");
+
+            document.getElementById("btnUpdate").addEventListener('click', function(){
+                PersonDetail[temp].PersonId=document.getElementById("pid").value;
+                PersonDetail[temp].PersonName=document.getElementById("pname").value;
+                PersonDetail[temp].City=document.getElementById("pcity").value;
+                PersonDetail[temp].Age=document.getElementById("page").value; 
+                PersonDetail[temp].Gender=document.getElementById("pgender").value;
+                showTable();
+               }, false);
+
+            } ,false);
+
+            document.getElementById("btnPrint").addEventListener('click', function(){
+                var h = document.getElementById("selCategory").value;
+                var t =document.getElementById("pshow").value;
+
+                showTable();
+
+            }, false);
+            
+
+        }
+    </script>
+</head>
+<body>
+    <h1>Persons Details</h1>
+    <br>
+    <table style="border: 1.5px solid;">
+        <tr>
+            <td>Person ID</td>
+            <td><input type="text" id="pid" class="per"></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" id="pname" class="per"></td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td><input type="text" id="pcity" class="per"></td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td><input type="text" id="page" class="per"></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td><input type="text" id="pgender" class="per"></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="Create User" id="btnSubmit">
+            </td>
+            <td>
+                <input type="button" value="Reset" id="btnReset">
+            </td>
+            
+        </tr>
+        <tr>
+            <td>Enter Id to delete</td>
+            <td><input type="text" id="pdelete" ></td>
+            <td>
+                <input type="button" value="Delete" id="btnDelete">
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Id to Edit details</td>
+            <td><input type="text" id="pedit" ></td>
+            <td>
+                <input type="button" value="Edit" id="btnEdit">
+            </td>
+        </tr>
+        <tr>
+            <td>Update here after edit details</td>
+            <td>
+                <input type="button" value="Update" id="btnUpdate">
+            </td>
+        </tr>
+        <tr>
+            <td>Choose category to show table</td>
+            <td>
+                <select id="selCategory">
+                <option value=''>---</option>
+                <option value="PersonId">PersonId</option>
+                <option value="PersonName">PersonName</option>
+                <option value="City">City</option>
+                <option value="Age">Age</option>
+                <option value="Gender">Gender</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="pshow" ></td>
+            <td>
+                <input type="button" value="Show Table" id="btnPrint">
+            </td>
+        </tr>
+            
+    </table>
+    <br>
+    <table style="border: 1.5px solid;" id="showtable"></table>
+</body>
+</html>
