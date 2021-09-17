@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <script src="./../build/Product.build.js"></script>
+</head>
+
+<body style="background-color: burlywood;">
+    <center>
+        <h2 style="color: blue;">Product Details</h2>
+        <div id="reg">
+            <div>Click here to register new product &nbsp; <input type="button" id="btnregister" value="Register"></div>    
+        </div>
+        <br>
+        <div id="create">
+            <table style="border: 1px solid; width: 350px; height: 200px; background-color: blanchedalmond;">
+                <tr>
+                    <td>Product-ID :- </td>
+                    <td>
+                        <input type="text" id="ProductId" readonly >
+                    </td>
+                </tr>
+                <tr>
+                    <td>Product Name :- </td>
+                    <td>
+                        <input type="text" id="ProductName" class="data" style="text-transform: capitalize;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Category Name :- </td>
+                    <td>
+                        <div id="cname" class="data"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Manufacturers :-
+                    <td>
+                        <div id="manu" class="data"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Price :- </td>
+                    <td>
+                        <input type="number" id="Price" min="0" class="data">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Submit" id="btnsub">
+                    </td>
+                    <td>
+                        <div id="update"></div>
+                    </td>
+                </tr>
+            </table>
+            <hr>
+        </div>
+        <table style="width: 420px; height: 70px;">
+            <tr>
+                <td>
+                    <div>Select Criteria to Search :- </div>
+                </td>
+
+                <td>
+                    <div id="dropdown"></div>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="msg"></div>
+                </td>
+                <td>
+                    <div id="filterbox"></div>
+                </td>
+                <td>
+                    <div id="btn"></div>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div id="status"></div>
+        <br>
+        <table style="border: 1px solid;" id="showTable"></table>
+    </center>
+</body>
+
+</html>
