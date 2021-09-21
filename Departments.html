@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="./Department.js"></script>
+    <style>
+        body {
+            background-color: lightskyblue;
+        }
+
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+
+        #logout {
+            float: right;
+        }
+
+        #logged {
+            float: right;
+            padding-right: 10px;
+            text-decoration: underline;
+        }
+
+        #addDept {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div>
+            <button class="btn btn-danger btn-sm" value="Log Out" id='logout'>Logout</button>
+            <h5 id="logged"></h5><br>
+        </div>
+        <br>
+        <h2>Department Details</h2>
+        <br>
+        <h5>
+            <div id='out'></div>
+        </h5>
+        <div id="show">
+            <input type="text" id="searchid" placeholder="Enter ID to search">&nbsp;
+            <button class="btn btn-info btn-sm" id='searchbtn'>Search</button>
+            <button class="btn btn-secondary" id='addDept'>Add New Department</button>
+            <br><br>
+
+            <center>
+                <div id="prod" class="table-responsive"></div>
+                <div id='msg'></div>
+
+            </center>
+        </div>
+    </div>
+    <a style="display:none;" href="/Logout" id="Logoutbtn"></a>
+    <a style="display:none;" href="/AddDepartment" id="adddepartment"></a>
+    <a style="display:none;" href="/UpdateDepartment" id="upddepartment"></a>
+</body>
+
+</html>
