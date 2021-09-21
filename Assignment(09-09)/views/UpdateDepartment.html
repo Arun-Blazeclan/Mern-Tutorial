@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="./UpdateDepatment.js"></script>
+    <style>
+        body {
+            background-color: lightskyblue;
+        }
+
+        #logout {
+            float: right;
+        }
+
+        #logged {
+            float: right;
+            padding-right: 10px;
+            text-decoration: underline;
+        }
+
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+
+        td {
+            width: 150px;
+            text-align: center;
+            padding: 5px
+        }
+
+        table {
+            border: 1px solid;
+            background-color: lemonchiffon;
+        }
+
+        #prodid {
+            text-transform: capitalize;
+        }
+
+        #prodname {
+            text-transform: capitalize;
+        }
+
+        #out {
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div>
+            <button class="btn btn-danger btn-sm" value="Log Out" id='logout'>Logout</button>
+            <h5 id="logged"></h5><br>
+        </div>
+        <br>
+        <h2>Update Department Details</h2>
+        <br>
+
+        <h5>
+            <div id='out'></div>
+        </h5>
+        <br> <br>
+        <div id='show'>
+            <center>
+                <table>
+                    <tr>
+                        <td>Dept.No.</td>
+                        <td><input type="number" min="0" name="clr" id="deptno"></td>
+                    </tr>
+                    <tr>
+                        <td>Dept. Name</td>
+                        <td><input type="text" name="clr" id="deptname"></td>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td><input type="text" name="clr" id="location"></td>
+                    </tr>
+                    <tr>
+                        <td>Capacity</td>
+                        <td><input type="number" min="0" name="clr" id="capacity">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn btn-secondary btn-sm" id='clrbtn'>Clear</button></td>
+                        <td><button class="btn btn-primary btn-sm" id='sbtbtn'>Submit</button></td>
+                    </tr>
+                </table>
+                <div id='msg'></div>
+            </center>
+        </div>
+        <a style="display:none;" href="/Departments" id="department"></a>
+        <a style="display:none;" href="/Logout" id="Logoutbtn"></a>
+    </div>
+</body>
+</html>
